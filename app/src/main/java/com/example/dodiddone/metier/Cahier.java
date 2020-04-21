@@ -1,10 +1,11 @@
-package models;
+package com.example.dodiddone.metier;
 
 import java.util.ArrayList;
 import java.util.HashMap;
 
 public class Cahier {
 
+    private long id;
     private String nom;
     private ArrayList<Page> pages;
     private HashMap<String, Structure> structure;
@@ -12,10 +13,13 @@ public class Cahier {
     public Cahier(String nom) {
         this.nom = nom;
     }
+    public Cahier(long id, String nom) {
+        this.id = id;
+        this.nom = nom;
+    }
 
-    public boolean AjoutPage(Page p)
-    {
-        return this.pages.add(p);
+    public long getID() {
+        return id;
     }
 
     public String getNom() {
@@ -24,5 +28,10 @@ public class Cahier {
 
     public void setNom(String nom) {
         this.nom = nom;
+    }
+
+    public boolean ajoutPage(Page p)
+    {
+        return this.pages.add(p);
     }
 }

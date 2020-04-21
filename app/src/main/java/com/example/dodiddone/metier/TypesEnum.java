@@ -1,4 +1,4 @@
-package models;
+package com.example.dodiddone.metier;
 
 public enum TypesEnum {
     TITRE,

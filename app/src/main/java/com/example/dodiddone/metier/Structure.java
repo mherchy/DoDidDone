@@ -1,4 +1,4 @@
-package models;
+package com.example.dodiddone.metier;
 
 public class Structure {
     private String nom;

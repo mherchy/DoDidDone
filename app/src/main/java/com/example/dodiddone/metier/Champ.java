@@ -1,4 +1,4 @@
-package models;
+package com.example.dodiddone.metier;
 
 import com.google.gson.JsonElement;
 
