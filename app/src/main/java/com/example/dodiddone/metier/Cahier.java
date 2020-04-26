@@ -1,16 +1,14 @@
 package com.example.dodiddone.metier;
 
-import java.util.ArrayList;
 import java.util.Collection;
 import java.util.HashMap;
 import java.util.HashSet;
-import java.util.List;
 
 public class Cahier extends Entity {
 
     protected String nom;
     protected HashSet<Page> pages;
-    protected HashMap<String, Structure> structure;
+    protected HashMap<String, Regle> structure;
 
 
     private Cahier() {

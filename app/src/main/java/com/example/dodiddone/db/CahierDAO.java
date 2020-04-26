@@ -60,7 +60,7 @@ public class CahierDAO extends AbstractDAO {
      * @return Set<Cahier>
      */
     public Set<Cahier> selectAll() {
-        Set list = new HashSet<>();
+        Set<Cahier> list = new HashSet<>();
         Cursor cursor = super.selectAllRows();
         while(cursor.moveToNext()) {
             Cahier c = new Cahier(cursor.getLong(0), cursor.getString(1));

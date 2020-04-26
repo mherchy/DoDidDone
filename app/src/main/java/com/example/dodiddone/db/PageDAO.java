@@ -55,7 +55,7 @@ public class PageDAO extends AbstractDAO {
      * @return Set<Page>
      */
     public Set<Page> selectCahierPages(long cahierId) {
-        Set list = new HashSet<>();
+        Set<Page> list = new HashSet<>();
         Cursor cursor = this.mDb.rawQuery("SELECT * FROM " + TABLE_NAME + " WHERE " + COL_FK_CAHIER + " = ?", new String[] {""+cahierId});
         while(cursor.moveToNext()) {
             Page p = new Page(cursor.getLong(0), cursor.getLong(1), cursor.getLong(2));

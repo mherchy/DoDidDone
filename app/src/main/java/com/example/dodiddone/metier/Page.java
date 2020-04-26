@@ -1,12 +1,11 @@
 package com.example.dodiddone.metier;
 
-import java.time.Instant;
 import java.util.Date;
 import java.util.HashMap;
 import java.util.Map;
 
 public class Page extends Entity {
-    protected Map<Structure, Champ> champs;
+    protected Map<Regle, Champ> champs;
     protected Date creation;
     protected long cahierRef;
 
