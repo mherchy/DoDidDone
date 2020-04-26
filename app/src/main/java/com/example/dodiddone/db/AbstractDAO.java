@@ -19,7 +19,7 @@ public abstract class AbstractDAO extends DAOBase {
      * @param row ContentValues
      * @return long the row ID of the newly inserted row, or -1 if an error occurred
      */
-    public long insert(ContentValues row) {
+    protected long insert(ContentValues row) {
         return mDb.insertOrThrow(this.tableName,null, row);
     }
 
@@ -29,7 +29,7 @@ public abstract class AbstractDAO extends DAOBase {
      * @param row ContentValues
      * @return int number of updated rows
      */
-    public int update(long id, ContentValues row) {
+    protected int update(long id, ContentValues row) {
         return mDb.update(this.tableName, row, COL_ID+" = ?", new String[] {""+id});
     }
 
@@ -43,10 +43,17 @@ public abstract class AbstractDAO extends DAOBase {
     }
 
     /**
+     * @return Cursor
+     */
+    protected Cursor selectAllRows() {
+        return mDb.rawQuery("SELECT * FROM "+ this.tableName, null);
+    }
+
+    /**
      * @param id long
      * @return Cursor
      */
-    protected Cursor selectCursor(long id) {
+    protected Cursor selectRowById(long id) {
         return mDb.rawQuery("SELECT * FROM "+ this.tableName + " WHERE id = ?", new String[] {""+id});
     }
 

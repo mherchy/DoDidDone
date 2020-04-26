@@ -1,25 +1,30 @@
 package com.example.dodiddone.metier;
 
 import java.util.ArrayList;
+import java.util.Collection;
 import java.util.HashMap;
+import java.util.HashSet;
+import java.util.List;
 
-public class Cahier {
+public class Cahier extends Entity {
 
-    private long id;
-    private String nom;
-    private ArrayList<Page> pages;
-    private HashMap<String, Structure> structure;
+    protected String nom;
+    protected HashSet<Page> pages;
+    protected HashMap<String, Structure> structure;
 
+
+    private Cahier() {
+        this.pages = new HashSet<>();
+        this.structure = new HashMap<>();
+    }
     public Cahier(String nom) {
+        this();
         this.nom = nom;
     }
     public Cahier(long id, String nom) {
+        this();
         this.id = id;
         this.nom = nom;
-    }
-
-    public long getID() {
-        return id;
     }
 
     public String getNom() {
@@ -30,8 +35,12 @@ public class Cahier {
         this.nom = nom;
     }
 
-    public boolean ajoutPage(Page p)
+    public boolean addPage(Page p)
     {
         return this.pages.add(p);
+    }
+    public boolean addPage(Collection<Page> pages)
+    {
+        return this.pages.addAll(pages);
     }
 }

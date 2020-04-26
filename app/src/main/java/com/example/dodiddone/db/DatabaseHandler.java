@@ -7,32 +7,31 @@ import android.database.sqlite.SQLiteOpenHelper;
 
 public class DatabaseHandler extends SQLiteOpenHelper {
 
-    /* Table Cahier */
-
-
-    public static final String SQL_CREATE = CahierDAO.TABLE_CREATE;
-    public static final String SQL_DROP = CahierDAO.TABLE_DROP;
-
-
     public DatabaseHandler(Context context, String name, CursorFactory factory, int version) {
         super(context, name, factory, version);
     }
 
     @Override
     public void onCreate(SQLiteDatabase db) {
-        db.execSQL(SQL_DROP);
-        db.execSQL(SQL_CREATE);
+        this.resetDb(db);
     }
 
     @Override
     public void onUpgrade(SQLiteDatabase db, int oldVersion, int newVersion) {
-        db.execSQL(SQL_DROP);
-        db.execSQL(SQL_CREATE);
+        this.resetDb(db);
     }
 
     @Override
     public void onDowngrade(SQLiteDatabase db, int oldVersion, int newVersion) {
-        db.execSQL(SQL_DROP);
-        db.execSQL(SQL_CREATE);
+        this.resetDb(db);
+    }
+
+    private void resetDb(SQLiteDatabase db) {
+        //Drop
+        db.execSQL(PageDAO.TABLE_DROP);
+        db.execSQL(CahierDAO.TABLE_DROP);
+        //Create
+        db.execSQL(CahierDAO.TABLE_CREATE);
+        db.execSQL(PageDAO.TABLE_CREATE);
     }
 }

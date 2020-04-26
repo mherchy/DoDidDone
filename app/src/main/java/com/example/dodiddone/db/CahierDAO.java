@@ -6,6 +6,9 @@ import android.database.Cursor;
 
 import com.example.dodiddone.metier.Cahier;
 
+import java.util.HashSet;
+import java.util.Set;
+
 public class CahierDAO extends AbstractDAO {
 
     public static final String TABLE_NAME = "cahier";
@@ -36,7 +39,7 @@ public class CahierDAO extends AbstractDAO {
     public int update(Cahier c) {
         ContentValues row = new ContentValues();
         row.put(COL_NOM, c.getNom());
-        return this.update(c.getID(), row);
+        return this.update(c.getId(), row);
     }
 
     /**
@@ -44,11 +47,27 @@ public class CahierDAO extends AbstractDAO {
      * @return Cahier
      */
     public Cahier select(long id) {
-        Cursor cursor = super.selectCursor(id);
-        cursor.moveToFirst();
+        Cursor cursor = super.selectRowById(id);
+        if(!cursor.moveToFirst()) {
+            return null;
+        }
         Cahier c = new Cahier(cursor.getLong(0), cursor.getString(1));
         cursor.close();
         return c;
+    }
+
+    /**
+     * @return Set<Cahier>
+     */
+    public Set<Cahier> selectAll() {
+        Set list = new HashSet<>();
+        Cursor cursor = super.selectAllRows();
+        while(cursor.moveToNext()) {
+            Cahier c = new Cahier(cursor.getLong(0), cursor.getString(1));
+            list.add(c);
+        }
+        cursor.close();
+        return list;
     }
 
 }
