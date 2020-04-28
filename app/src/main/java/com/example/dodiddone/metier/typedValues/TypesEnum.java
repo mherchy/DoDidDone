@@ -1,4 +1,4 @@
-package com.example.dodiddone.metier;
+package com.example.dodiddone.metier.typedValues;
 
 public enum TypesEnum {
     TITRE,

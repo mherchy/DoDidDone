@@ -5,7 +5,7 @@ import java.util.HashMap;
 import java.util.Map;
 
 public class Page extends Entity {
-    protected Map<Regle, Champ> champs;
+    protected Map<Regle, Ligne> champs;
     protected Date creation;
     protected long cahierRef;
 

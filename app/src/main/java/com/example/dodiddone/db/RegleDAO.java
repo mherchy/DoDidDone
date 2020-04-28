@@ -4,9 +4,7 @@ import android.content.ContentValues;
 import android.content.Context;
 import android.database.Cursor;
 
-import com.example.dodiddone.metier.Page;
 import com.example.dodiddone.metier.Regle;
-import com.example.dodiddone.metier.TypesEnum;
 
 import java.util.HashSet;
 import java.util.Set;

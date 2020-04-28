@@ -1,5 +1,7 @@
 package com.example.dodiddone.metier;
 
+import com.example.dodiddone.metier.typedValues.TypesEnum;
+
 public class Regle extends Entity {
 
     private String nom;
