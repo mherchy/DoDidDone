@@ -1,4 +1,4 @@
-package com.example.dodiddone;
+package com.example.dodiddone.activities;
 
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.cardview.widget.CardView;
@@ -10,6 +10,7 @@ import android.view.ViewGroup;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 
+import com.example.dodiddone.R;
 import com.example.dodiddone.db.CahierDAO;
 import com.example.dodiddone.db.LigneDAO;
 import com.example.dodiddone.db.PageDAO;
