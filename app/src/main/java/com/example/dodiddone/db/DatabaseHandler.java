@@ -28,10 +28,14 @@ public class DatabaseHandler extends SQLiteOpenHelper {
 
     private void resetDb(SQLiteDatabase db) {
         //Drop
+        db.execSQL(LigneDAO.TABLE_DROP);
         db.execSQL(PageDAO.TABLE_DROP);
+        db.execSQL(RegleDAO.TABLE_DROP);
         db.execSQL(CahierDAO.TABLE_DROP);
         //Create
         db.execSQL(CahierDAO.TABLE_CREATE);
+        db.execSQL(RegleDAO.TABLE_CREATE);
         db.execSQL(PageDAO.TABLE_CREATE);
+        db.execSQL(LigneDAO.TABLE_CREATE);
     }
 }

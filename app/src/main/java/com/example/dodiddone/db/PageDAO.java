@@ -26,39 +26,48 @@ public class PageDAO extends AbstractDAO {
             "); ";
     public static final String TABLE_DROP = "DROP TABLE IF EXISTS " + TABLE_NAME + "; ";
 
+    private Cahier pCahier;
 
-    public PageDAO(Context pContext) {
+    public PageDAO(Context pContext, Cahier pCahier) {
         super(pContext, TABLE_NAME);
+        this.pCahier = pCahier;
     }
 
-
-    public long insert(Page p) {
+    /**
+     * @param e Page
+     * @return boolean
+     */
+    public boolean insert(Page e) {
         ContentValues row = new ContentValues();
-        row.put(COL_CREATION, p.getCreation().getTime());
-        row.put(COL_FK_CAHIER, p.getCahierRef());
-        return this.insert(row);
+        row.put(COL_CREATION, e.getCreation().getTime());
+        row.put(COL_FK_CAHIER, this.pCahier.getId());
+        long id = this.insert(row);
+        if(id != -1) {
+            e.setId(id);
+            return true;
+        }
+        return false;
     }
 
     /**
      */
-    public int update(Page p) {
+    public boolean update(Page e) {
         ContentValues row = new ContentValues();
-        row.put(COL_CREATION, p.getCreation().getTime());
-        row.put(COL_FK_CAHIER, p.getCahierRef());
-        return this.update(p.getId(), row);
+        row.put(COL_CREATION, e.getCreation().getTime());
+        row.put(COL_FK_CAHIER, this.pCahier.getId());
+        return this.update(e.getId(), row) > 0;
     }
 
 
 
     /**
-     * @param cahierId long
      * @return Set<Page>
      */
-    public Set<Page> selectCahierPages(long cahierId) {
+    public Set<Page> selectCahierPages() {
         Set<Page> list = new HashSet<>();
-        Cursor cursor = this.mDb.rawQuery("SELECT * FROM " + TABLE_NAME + " WHERE " + COL_FK_CAHIER + " = ?", new String[] {""+cahierId});
+        Cursor cursor = mDb.rawQuery("SELECT * FROM " + TABLE_NAME + " WHERE " + COL_FK_CAHIER + " = ?", new String[] {""+this.pCahier.getId()});
         while(cursor.moveToNext()) {
-            Page p = new Page(cursor.getLong(0), cursor.getLong(1), cursor.getLong(2));
+            Page p = new Page(cursor.getLong(0), cursor.getLong(1), pCahier);
             list.add(p);
         }
         cursor.close();

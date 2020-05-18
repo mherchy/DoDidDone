@@ -27,19 +27,27 @@ public class CahierDAO extends AbstractDAO {
         super(pContext, TABLE_NAME);
     }
 
-
-    public long insert(Cahier c) {
+    /**
+     * @param e Cahier
+     * @return boolean
+     */
+    public boolean insert(Cahier e) {
         ContentValues row = new ContentValues();
-        row.put(COL_NOM, c.getNom());
-        return this.insert(row);
+        row.put(COL_NOM, e.getNom());
+        long id = this.insert(row);
+        if(id != -1) {
+            e.setId(id);
+            return true;
+        }
+        return false;
     }
 
     /**
      */
-    public int update(Cahier c) {
+    public boolean update(Cahier e) {
         ContentValues row = new ContentValues();
-        row.put(COL_NOM, c.getNom());
-        return this.update(c.getId(), row);
+        row.put(COL_NOM, e.getNom());
+        return this.update(e.getId(), row) > 0;
     }
 
     /**

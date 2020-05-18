@@ -1,3 +1,5 @@
 <resources>
     <string name="app_name">DoDidDone</string>
+    <string name="section_cahier_name">Mes Cahiers</string>
+    <string name="section_cahier_add_btn">Créer</string>
 </resources>

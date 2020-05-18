@@ -3,17 +3,18 @@ package com.example.dodiddone.metier;
 import java.util.Collection;
 import java.util.HashMap;
 import java.util.HashSet;
+import java.util.Iterator;
 
 public class Cahier extends Entity {
 
     protected String nom;
     protected HashSet<Page> pages;
-    protected HashMap<String, Regle> structure;
+    protected HashMap<Long, Regle> regles;
 
 
     private Cahier() {
         this.pages = new HashSet<>();
-        this.structure = new HashMap<>();
+        this.regles = new HashMap<>();
     }
     public Cahier(String nom) {
         this();
@@ -40,5 +41,21 @@ public class Cahier extends Entity {
     public boolean addPage(Collection<Page> pages)
     {
         return this.pages.addAll(pages);
+    }
+
+    public HashSet<Page> getPages() {
+        return pages;
+    }
+
+    public HashMap<Long, Regle> getRegles() {
+        return regles;
+    }
+    public void addRegle(Regle r) {
+        this.regles.put(r.getId(), r);
+    }
+    public void addRegle(Iterable<Regle> itr) {
+        for (Regle regle : itr) {
+            this.addRegle(regle);
+        }
     }
 }

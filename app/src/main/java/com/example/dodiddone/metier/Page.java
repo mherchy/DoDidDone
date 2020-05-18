@@ -5,23 +5,39 @@ import java.util.HashMap;
 import java.util.Map;
 
 public class Page extends Entity {
-    protected Map<Regle, Ligne> champs;
-    protected Date creation;
-    protected long cahierRef;
+    private Map<Regle, Ligne> lignes;
+    private Date creation;
+    private Cahier cahier;
 
-    public Page() {
-        this.champs = new HashMap<>();
+
+    /**
+     * Base Constructor
+     */
+    private Page() {
+        this.lignes = new HashMap<>();
     }
-    public Page(long id, long creationTimestamp, long cahierRef) {
+    /**
+     * Used by DB
+     * Generate an empty Page
+     * @param id long
+     * @param creationTimestamp long
+     * @param cahier cahier
+     */
+    public Page(long id, long creationTimestamp, Cahier cahier) {
         this();
         this.id = id;
         this.creation = new Date(creationTimestamp);
-        this.cahierRef = cahierRef;
+        this.cahier = cahier;
     }
-
-    public Page(long cahierRef) {
-        this.creation = new Date();
-        this.cahierRef = cahierRef;
+    /**
+     * Used by the UI
+     * Generate an empty Page
+     * @param cahier Cahier
+     */
+    public Page(Cahier cahier, Date date) {
+        this();
+        this.creation = date;
+        this.cahier = cahier;
     }
 
     public Date getCreation() {
@@ -32,11 +48,15 @@ public class Page extends Entity {
         this.creation = creation;
     }
 
-    public long getCahierRef() {
-        return cahierRef;
+    public Cahier getCahier() {
+        return cahier;
     }
 
-    public void setCahierRef(long cahierRef) {
-        this.cahierRef = cahierRef;
+    public void setCahier(Cahier cahier) {
+        this.cahier = cahier;
+    }
+
+    public void addLigne(Ligne l) {
+        this.lignes.put(l.getRegle(), l);
     }
 }
