@@ -14,10 +14,16 @@
     <string name="section_cahier_add_btn">Créer</string>
 
 
+    <string name="section_pages_name">Pages</string>
+    <string name="section_page_add_btn">Ajouter</string>
+
+
     <!-- DIALOGS -->
 
     <string name="dialog_create_cahier_title">Créer un nouveau cahier</string>
     <string name="dialog_create_cahier_name_input">Nom du nouveau cahier</string>
     <string name="dialog_create_cahier_has_title">Mes pages comportent un titre</string>
     <string name="dialog_create_cahier_has_desc">Mes pages comportent une description</string>
+
+    <string name="dialog_create_page_title">Nouvelle page</string>
 </resources>

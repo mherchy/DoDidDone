@@ -1,11 +1,12 @@
 package com.example.dodiddone.metier;
 
+import java.io.Serializable;
 import java.util.Collection;
 import java.util.HashMap;
 import java.util.HashSet;
 import java.util.Iterator;
 
-public class Cahier extends Entity {
+public class Cahier extends Entity implements Serializable {
 
     protected String nom;
     protected HashSet<Page> pages;
@@ -58,4 +59,6 @@ public class Cahier extends Entity {
             this.addRegle(regle);
         }
     }
+
+
 }

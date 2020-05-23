@@ -61,10 +61,11 @@ public class PageDAO extends AbstractDAO {
 
 
     /**
-     * @return Set<Page>
+     * @return HashSet<Page>
+     * @// TODO: 23/05/2020 change to likedList
      */
-    public Set<Page> selectCahierPages() {
-        Set<Page> list = new HashSet<>();
+    public HashSet<Page> selectCahierPages() {
+        HashSet<Page> list = new HashSet<>();
         Cursor cursor = mDb.rawQuery("SELECT * FROM " + TABLE_NAME + " WHERE " + COL_FK_CAHIER + " = ?", new String[] {""+this.pCahier.getId()});
         while(cursor.moveToNext()) {
             Page p = new Page(cursor.getLong(0), cursor.getLong(1), pCahier);

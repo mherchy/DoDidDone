@@ -4,6 +4,7 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.cardview.widget.CardView;
 
 import android.content.Context;
+import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
@@ -21,6 +22,8 @@ import java.util.Set;
 
 public class CahiersActivity extends AppCompatActivity {
 
+    private Set<Cahier> cahiers;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -35,18 +38,17 @@ public class CahiersActivity extends AppCompatActivity {
         Context appCtxt = getApplicationContext();
         CahierDAO cdao = new CahierDAO(appCtxt);
         cdao.open();
-        Set<Cahier> cahiers =  cdao.selectAll();
+        this.cahiers =  cdao.selectAll();
         cdao.close();
 
-        LinearLayout container = (LinearLayout) findViewById(R.id.cahier_container);
+        LinearLayout container = (LinearLayout) findViewById(R.id.cahieract_caihiers_container);
 
         ArrayList<View> cards = new ArrayList<>();
 
-        Iterator<Cahier> ic = cahiers.iterator();
+        Iterator<Cahier> ic = this.cahiers.iterator();
         while (ic.hasNext()) {
             Cahier c = ic.next();
             View v = this.getVueFromCahier(c);
-//            cards.add(v);
             container.addView(v);
         }
 
@@ -58,6 +60,7 @@ public class CahiersActivity extends AppCompatActivity {
         Context appCtxt = getApplicationContext();
         CardView card = new CardView(appCtxt);
         card.setUseCompatPadding(true);
+        card.setTag(c);
 
         // Filling Card with components
         TextView title = new TextView(appCtxt);
@@ -67,7 +70,10 @@ public class CahiersActivity extends AppCompatActivity {
         card.setOnClickListener(new CardView.OnClickListener() {
             @Override
             public void onClick(View v) {
-
+                Cahier cahier = (Cahier) v.getTag();
+                Intent intent = new Intent(getApplicationContext(), PagesActivity.class);
+                intent.putExtra(PagesActivity.START_ACTIVITY, cahier.getId());
+                startActivity(intent);
             }
         });
 

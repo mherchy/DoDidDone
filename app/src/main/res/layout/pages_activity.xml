@@ -4,7 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".activities.CahiersActivity">
+    tools:context=".activities.PagesActivity">
 
     <LinearLayout
         android:layout_width="match_parent"
@@ -24,7 +24,7 @@
                 android:layout_height="wrap_content"
                 android:layout_weight="20"
                 android:singleLine="false"
-                android:text="@string/section_cahier_name"
+                android:text="@string/section_pages_name"
                 android:textAppearance="@style/TextAppearance.AppCompat.Display1" />
 
             <Button
@@ -32,8 +32,8 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_weight="40"
-                android:onClick="onCreateCahier"
-                android:text="@string/section_cahier_add_btn" />
+                android:onClick="onAddPage"
+                android:text="@string/section_page_add_btn" />
 
         </LinearLayout>
 
@@ -43,12 +43,12 @@
             android:measureAllChildren="false">
 
             <LinearLayout
-                android:id="@+id/cahieract_caihiers_container"
+                android:id="@+id/pageact_pages_container"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:dividerPadding="200dp"
                 android:orientation="vertical"
-                android:showDividers="middle"/>
+                android:showDividers="middle" />
         </ScrollView>
 
     </LinearLayout>
