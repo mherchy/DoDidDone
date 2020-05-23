@@ -59,4 +59,9 @@ public class Page extends Entity {
     public void addLigne(Ligne l) {
         this.lignes.put(l.getRegle(), l);
     }
+    public void addLigne(Iterable<Ligne> itr) {
+        for (Ligne ligne : itr) {
+            this.addLigne(ligne);
+        }
+    }
 }

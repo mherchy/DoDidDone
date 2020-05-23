@@ -15,6 +15,7 @@ import com.example.dodiddone.R;
 import com.example.dodiddone.activities.dialogs.AddPageDialogFragment;
 import com.example.dodiddone.activities.dialogs.CreateCahierDialogFragment;
 import com.example.dodiddone.db.CahierDAO;
+import com.example.dodiddone.db.EntitiesManager;
 import com.example.dodiddone.db.PageDAO;
 import com.example.dodiddone.metier.Cahier;
 import com.example.dodiddone.metier.Page;
@@ -49,14 +50,8 @@ public class PagesActivity extends AppCompatActivity {
 
     private void fetchData(long cid) {
         Context appCtxt = getApplicationContext();
-        CahierDAO cdao = new CahierDAO(appCtxt);
-        cdao.open();
-        this.cahier =  cdao.select(cid);
-
-        PageDAO pdao = new PageDAO(appCtxt, this.cahier);
-        this.pages =  pdao.selectCahierPages();
-        this.cahier.addPage(this.pages);
-        cdao.close();
+        this.cahier =  EntitiesManager.getCompleteCahier(appCtxt, cid);
+        this.pages = this.cahier.getPages();
     }
 
 
