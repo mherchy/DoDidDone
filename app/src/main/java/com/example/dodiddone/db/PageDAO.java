@@ -8,6 +8,7 @@ import com.example.dodiddone.metier.Cahier;
 import com.example.dodiddone.metier.Page;
 
 import java.util.HashSet;
+import java.util.LinkedList;
 import java.util.Set;
 
 public class PageDAO extends AbstractDAO {
@@ -61,11 +62,10 @@ public class PageDAO extends AbstractDAO {
 
 
     /**
-     * @return HashSet<Page>
-     * @// TODO: 23/05/2020 change to likedList
+     * @return LinkedList<Page>
      */
-    public HashSet<Page> selectCahierPages() {
-        HashSet<Page> list = new HashSet<>();
+    public LinkedList<Page> selectCahierPages() {
+        LinkedList<Page> list = new LinkedList<>();
         Cursor cursor = mDb.rawQuery("SELECT * FROM " + TABLE_NAME + " WHERE " + COL_FK_CAHIER + " = ?", new String[] {""+this.pCahier.getId()});
         while(cursor.moveToNext()) {
             Page p = new Page(cursor.getLong(0), cursor.getLong(1), pCahier);

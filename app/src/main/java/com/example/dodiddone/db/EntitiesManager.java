@@ -7,6 +7,7 @@ import com.example.dodiddone.metier.Ligne;
 import com.example.dodiddone.metier.Page;
 import com.example.dodiddone.metier.Regle;
 
+import java.util.LinkedList;
 import java.util.Set;
 
 public class EntitiesManager {
@@ -25,7 +26,7 @@ public class EntitiesManager {
 
         // Pages
         PageDAO pdao = new PageDAO(appCtxt, cahier);
-        Set<Page> pages = pdao.selectCahierPages();
+        LinkedList<Page> pages = pdao.selectCahierPages();
         cahier.addPage(pages);
 
         // Lignes

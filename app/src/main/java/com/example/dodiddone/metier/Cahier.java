@@ -5,16 +5,17 @@ import java.util.Collection;
 import java.util.HashMap;
 import java.util.HashSet;
 import java.util.Iterator;
+import java.util.LinkedList;
 
 public class Cahier extends Entity implements Serializable {
 
     protected String nom;
-    protected HashSet<Page> pages;
+    protected LinkedList<Page> pages;
     protected HashMap<Long, Regle> regles;
 
 
     private Cahier() {
-        this.pages = new HashSet<>();
+        this.pages = new LinkedList<>();
         this.regles = new HashMap<>();
     }
     public Cahier(String nom) {
@@ -44,7 +45,7 @@ public class Cahier extends Entity implements Serializable {
         return this.pages.addAll(pages);
     }
 
-    public HashSet<Page> getPages() {
+    public LinkedList<Page> getPages() {
         return pages;
     }
 

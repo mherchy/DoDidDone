@@ -23,13 +23,14 @@ import com.example.dodiddone.metier.Page;
 import java.util.ArrayList;
 import java.util.HashSet;
 import java.util.Iterator;
+import java.util.LinkedList;
 
 public class PagesActivity extends AppCompatActivity {
 
     public static final String START_ACTIVITY = "com.example.dodiddone.activities.PagesActivity.START_ACTIVITY";
 
     private Cahier cahier;
-    private HashSet<Page> pages;
+    private LinkedList<Page> pages;
 
 
     @Override
