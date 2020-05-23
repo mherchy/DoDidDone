@@ -5,28 +5,17 @@ import androidx.cardview.widget.CardView;
 
 import android.content.Context;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
-import android.view.ViewGroup;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import com.example.dodiddone.R;
+import com.example.dodiddone.activities.dialogs.CreateCahierDialogFragment;
 import com.example.dodiddone.db.CahierDAO;
-import com.example.dodiddone.db.LigneDAO;
-import com.example.dodiddone.db.PageDAO;
-import com.example.dodiddone.db.RegleDAO;
 import com.example.dodiddone.metier.Cahier;
-import com.example.dodiddone.metier.Ligne;
-import com.example.dodiddone.metier.Page;
-import com.example.dodiddone.metier.Regle;
-import com.example.dodiddone.metier.typedValues.DataType;
-import com.example.dodiddone.metier.typedValues.NumericDataType;
-import com.example.dodiddone.metier.typedValues.TypesEnum;
 
-import java.math.BigDecimal;
 import java.util.ArrayList;
-import java.util.Date;
-import java.util.HashSet;
 import java.util.Iterator;
 import java.util.Set;
 
@@ -37,12 +26,12 @@ public class CahiersActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
-        userCahier();
+        displayCahiers();
 
     }
 
 
-    protected void userCahier() {
+    protected void displayCahiers() {
         Context appCtxt = getApplicationContext();
         CahierDAO cdao = new CahierDAO(appCtxt);
         cdao.open();
@@ -75,7 +64,22 @@ public class CahiersActivity extends AppCompatActivity {
         title.setText(c.getNom());
         card.addView(title);
 
+        card.setOnClickListener(new CardView.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+
+            }
+        });
+
         return card;
+    }
+
+
+    public void onCreateCahier(View btn) {
+        Log.println(Log.INFO,"touch", "touch");
+
+        CreateCahierDialogFragment dialog = new CreateCahierDialogFragment();
+        dialog.show(this.getSupportFragmentManager(),"CreateCahier");
     }
 
 }
