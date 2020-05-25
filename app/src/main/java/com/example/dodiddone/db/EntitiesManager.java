@@ -43,4 +43,19 @@ public class EntitiesManager {
     }
 
 
+    public static void insertNewPage(Context context, Cahier cahier, Page page) {
+        PageDAO pdao = new PageDAO(context, cahier);
+        pdao.open();
+        pdao.insert(page);
+
+        LigneDAO ldao = new LigneDAO(context, page);
+
+        for (Ligne l : page.getLignes().values()) {
+            ldao.insert(l);
+        }
+
+        ldao.close();
+    }
+
+
 }

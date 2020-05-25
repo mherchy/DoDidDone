@@ -64,4 +64,8 @@ public class Page extends Entity {
             this.addLigne(ligne);
         }
     }
+
+    public Map<Regle, Ligne> getLignes() {
+        return lignes;
+    }
 }

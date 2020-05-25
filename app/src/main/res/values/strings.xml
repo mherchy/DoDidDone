@@ -4,8 +4,18 @@
 
     <string name="app_name">DoDidDone</string>
 
+    <string name="cahier">Cahier</string>
+    <string name="cahiers">Cahiers</string>
+    <string name="page">Page</string>
+    <string name="pages">Pages</string>
+    <string name="ligne">Ligne</string>
+    <string name="lignes">Lignes</string>
+    <string name="regle">Regle</string>
+    <string name="regles">Regles</string>
+
     <string name="cancel">Annuler</string>
     <string name="create">Créer</string>
+
 
 
     <!-- ACTIVITIES -->

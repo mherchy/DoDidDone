@@ -44,7 +44,12 @@ public class PagesActivity extends AppCompatActivity {
         Log.i("IntendID", "page id = "+cid);
 
         fetchData(cid);
+
+        ((TextView)findViewById(R.id.section_page_title)).setText(this.cahier.getNom());
+
         displayPages();
+
+
 
     }
 
