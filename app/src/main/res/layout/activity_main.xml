@@ -28,11 +28,11 @@
                 android:textAppearance="@style/TextAppearance.AppCompat.Display1" />
 
             <Button
-                android:id="@+id/button2"
+                android:id="@+id/ajoutPageBtn"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_weight="40"
-                android:onClick="onCreateCahier"
+                android:onClick="onClickCreateCahier"
                 android:text="@string/section_cahier_add_btn" />
 
         </LinearLayout>

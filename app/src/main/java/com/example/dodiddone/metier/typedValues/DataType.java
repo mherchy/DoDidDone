@@ -1,5 +1,7 @@
 package com.example.dodiddone.metier.typedValues;
 
+import androidx.annotation.NonNull;
+
 public abstract class DataType<T> {
 
     private T value;
@@ -10,6 +12,9 @@ public abstract class DataType<T> {
     public abstract String toStorable();
 
     public abstract void setFromStorable(String storableValue);
+
+    @NonNull
+    public abstract String toString();
 
     public T getTyped() {
         return this.value;

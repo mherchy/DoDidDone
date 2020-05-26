@@ -15,7 +15,10 @@
 
     <string name="cancel">Annuler</string>
     <string name="create">Créer</string>
+    <string name="config">Configuration</string>
 
+    <string name="bool_true">Oui</string>
+    <string name="bool_false">Non</string>
 
 
     <!-- ACTIVITIES -->
@@ -28,6 +31,12 @@
     <string name="section_page_add_btn">Ajouter</string>
 
 
+    <string name="section_cahier_config_name">Règles</string>
+    <string name="section_cahier_config_add">Ajouter une règle</string>
+    <string name="section_cahier_config_no_regle_msg">Il n\'y a pas encore de règles dans ce cahier</string>
+    <string name="section_cahier_regle_name">"%1$s (%2$s)"</string>
+
+
     <!-- DIALOGS -->
 
     <string name="dialog_create_cahier_title">Créer un nouveau cahier</string>
@@ -36,4 +45,11 @@
     <string name="dialog_create_cahier_has_desc">Mes pages comportent une description</string>
 
     <string name="dialog_create_page_title">Nouvelle page</string>
+
+
+    <string name="dialog_create_regle_title">Nouvelle Règle</string>
+    <string name="dialog_create_regle_name_input_hint">Nom</string>
+    <string name="dialog_create_regle_unit_input_hint">Unité (Optionnel)</string>
+
+
 </resources>

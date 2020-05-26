@@ -13,21 +13,18 @@ import android.widget.TextView;
 
 import com.example.dodiddone.R;
 import com.example.dodiddone.activities.dialogs.AddPageDialogFragment;
-import com.example.dodiddone.activities.dialogs.CreateCahierDialogFragment;
-import com.example.dodiddone.db.CahierDAO;
 import com.example.dodiddone.db.EntitiesManager;
-import com.example.dodiddone.db.PageDAO;
 import com.example.dodiddone.metier.Cahier;
 import com.example.dodiddone.metier.Page;
+import com.example.dodiddone.vues.PageCardView;
 
 import java.util.ArrayList;
-import java.util.HashSet;
 import java.util.Iterator;
 import java.util.LinkedList;
 
-public class PagesActivity extends AppCompatActivity {
+public class CahierActivity extends AppCompatActivity {
 
-    public static final String START_ACTIVITY = "com.example.dodiddone.activities.PagesActivity.START_ACTIVITY";
+    public static final String CAHIER_ID = "com.example.dodiddone.activities.CahierActivity.CAHIER_ID";
 
     private Cahier cahier;
     private LinkedList<Page> pages;
@@ -36,10 +33,10 @@ public class PagesActivity extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.pages_activity);
+        setContentView(R.layout.cahier_activity);
 
         Intent intent = getIntent();
-        long cid = intent.getLongExtra(START_ACTIVITY, -1);
+        long cid = intent.getLongExtra(CAHIER_ID, -1);
 
         Log.i("IntendID", "page id = "+cid);
 
@@ -73,31 +70,27 @@ public class PagesActivity extends AppCompatActivity {
             View v = this.getVueFromPage(p);
             container.addView(v);
         }
-
-        container.addTouchables(cards);
     }
 
     protected View getVueFromPage(Page p) {
-        Context appCtxt = getApplicationContext();
-        CardView card = new CardView(appCtxt);
+        PageCardView card = new PageCardView(this, p);
         card.setUseCompatPadding(true);
-        card.setTag(p);
-
-        // Filling Card with components
-        TextView title = new TextView(appCtxt);
-        title.setText((CharSequence) "une page");
-        card.addView(title);
-
         return card;
     }
 
 
 
-    public void onAddPage(View btn) {
+    public void onAddPageClick(View btn) {
         Log.println(Log.INFO,"touch", "touch");
 
         AddPageDialogFragment dialog = new AddPageDialogFragment(this.cahier);
         dialog.show(this.getSupportFragmentManager(),"AddPage");
+    }
+
+    public void onConfigClick(View btn) {
+        Intent intent = new Intent(this, CahierConfigActivity.class);
+        intent.putExtra(CahierConfigActivity.CAHIER_ID, cahier.getId());
+        startActivity(intent);
     }
 
 }

@@ -51,9 +51,6 @@ public class CahiersActivity extends AppCompatActivity {
             View v = this.getVueFromCahier(c);
             container.addView(v);
         }
-
-        container.addTouchables(cards);
-
     }
 
     protected View getVueFromCahier(Cahier c) {
@@ -71,8 +68,8 @@ public class CahiersActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 Cahier cahier = (Cahier) v.getTag();
-                Intent intent = new Intent(getApplicationContext(), PagesActivity.class);
-                intent.putExtra(PagesActivity.START_ACTIVITY, cahier.getId());
+                Intent intent = new Intent(getApplicationContext(), CahierActivity.class);
+                intent.putExtra(CahierActivity.CAHIER_ID, cahier.getId());
                 startActivity(intent);
             }
         });
@@ -81,7 +78,7 @@ public class CahiersActivity extends AppCompatActivity {
     }
 
 
-    public void onCreateCahier(View btn) {
+    public void onClickCreateCahier(View btn) {
         Log.println(Log.INFO,"touch", "touch");
 
         CreateCahierDialogFragment dialog = new CreateCahierDialogFragment();

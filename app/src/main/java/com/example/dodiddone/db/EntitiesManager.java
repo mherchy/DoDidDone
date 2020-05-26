@@ -43,6 +43,25 @@ public class EntitiesManager {
     }
 
 
+    public static Cahier getNoPageCahier(Context appCtxt, long cid) {
+        CahierDAO cdao = new CahierDAO(appCtxt);
+        cdao.open();
+
+        // Base entity
+        Cahier cahier =  cdao.select(cid);
+
+        //Regles
+        RegleDAO rdao = new RegleDAO(appCtxt, cahier);
+        Set<Regle> regles = rdao.selectCahierRegles();
+        cahier.addRegle(regles);
+
+        cdao.close();
+
+        return cahier;
+
+    }
+
+
     public static void insertNewPage(Context context, Cahier cahier, Page page) {
         PageDAO pdao = new PageDAO(context, cahier);
         pdao.open();

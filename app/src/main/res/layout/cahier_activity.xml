@@ -4,7 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".activities.PagesActivity">
+    tools:context=".activities.CahierActivity">
 
     <LinearLayout
         android:layout_width="match_parent"
@@ -28,12 +28,20 @@
                 android:textAppearance="@style/TextAppearance.AppCompat.Display1" />
 
             <Button
-                android:id="@+id/button2"
+                android:id="@+id/ajoutPageBtn"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_weight="40"
-                android:onClick="onAddPage"
+                android:onClick="onAddPageClick"
                 android:text="@string/section_page_add_btn" />
+
+            <Button
+                android:id="@+id/button"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_weight="20"
+                android:onClick="onConfigClick"
+                android:text="@string/config" />
 
         </LinearLayout>
 

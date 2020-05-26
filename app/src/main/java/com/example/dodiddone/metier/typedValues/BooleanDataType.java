@@ -1,5 +1,7 @@
 package com.example.dodiddone.metier.typedValues;
 
+import androidx.annotation.NonNull;
+
 import java.math.BigDecimal;
 
 public class BooleanDataType extends DataType<Boolean> {
@@ -12,5 +14,11 @@ public class BooleanDataType extends DataType<Boolean> {
     @Override
     public void setFromStorable(String storableValue) {
         this.setTyped(storableValue.equals("1"));
+    }
+
+    @NonNull
+    @Override
+    public String toString() {
+        return this.getTyped() ? "Oui" : "Non";
     }
 }
