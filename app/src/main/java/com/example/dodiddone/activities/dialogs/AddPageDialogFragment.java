@@ -29,13 +29,12 @@ import java.util.Date;
 import java.util.HashSet;
 import java.util.Iterator;
 
-public class AddPageDialogFragment extends DialogFragment {
+public class AddPageDialogFragment extends MyDialogFragment {
 
     private Cahier cahier;
 
     public AddPageDialogFragment(Cahier c) {
         this.cahier = c;
-        //Todo fetch the rules
     }
 
     @NonNull

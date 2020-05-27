@@ -43,6 +43,8 @@
     <string name="dialog_create_cahier_name_input">Nom du nouveau cahier</string>
     <string name="dialog_create_cahier_has_title">Mes pages comportent un titre</string>
     <string name="dialog_create_cahier_has_desc">Mes pages comportent une description</string>
+    <string name="dialog_create_cahier_title_default_name">Titre</string>
+    <string name="dialog_create_cahier_desc_default_name">Description</string>
 
     <string name="dialog_create_page_title">Nouvelle page</string>
 

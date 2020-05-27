@@ -27,7 +27,7 @@ import com.example.dodiddone.metier.typedValues.input.DataTypeInput;
 
 import java.util.Date;
 
-public class AddRegleDialogFragment extends DialogFragment {
+public class AddRegleDialogFragment extends MyDialogFragment {
 
     private Cahier cahier;
 

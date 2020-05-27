@@ -3,7 +3,7 @@ package com.example.dodiddone.activities;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.cardview.widget.CardView;
 
-import android.content.Context;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
@@ -12,7 +12,6 @@ import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import com.example.dodiddone.R;
-import com.example.dodiddone.activities.dialogs.AddPageDialogFragment;
 import com.example.dodiddone.activities.dialogs.AddRegleDialogFragment;
 import com.example.dodiddone.db.EntitiesManager;
 import com.example.dodiddone.metier.Cahier;
@@ -24,6 +23,7 @@ public class CahierConfigActivity extends AppCompatActivity {
 
     public static final String CAHIER_ID = "com.example.dodiddone.activities.CahierConfigActivity.CAHIER_ID";
 
+    private long cahierId;
     private Cahier cahier;
 
     @Override
@@ -32,26 +32,34 @@ public class CahierConfigActivity extends AppCompatActivity {
         setContentView(R.layout.activity_cahier_config);
 
         Intent intent = getIntent();
-        long cid = intent.getLongExtra(CAHIER_ID, -1);
-        this.cahier = EntitiesManager.getNoPageCahier(getApplicationContext(), cid);
-
-        loadRegisteredRegles();
+        cahierId = intent.getLongExtra(CAHIER_ID, -1);
     }
 
     @Override
     protected void onResume() {
         super.onResume();
-        loadRegisteredRegles();
+        reload();
+    }
+
+    public void reload() {
+        this.cahier = EntitiesManager.getNoPageCahier(getApplicationContext(), cahierId);
+        displayRegisteredRegles();
     }
 
     public void onAddRegle(View btn) {
         Log.println(Log.INFO,"touch", "touch");
 
         AddRegleDialogFragment dialog = new AddRegleDialogFragment(this.cahier);
+        dialog.setOnDismissListener(new DialogInterface.OnDismissListener() {
+            @Override
+            public void onDismiss(DialogInterface dialog) {
+                reload();
+            }
+        });
         dialog.show(this.getSupportFragmentManager(),"AddRegle");
     }
 
-    private void loadRegisteredRegles() {
+    private void displayRegisteredRegles() {
 
         LinearLayout container = (LinearLayout) findViewById(R.id.registered_regles_container);
         container.removeAllViews();

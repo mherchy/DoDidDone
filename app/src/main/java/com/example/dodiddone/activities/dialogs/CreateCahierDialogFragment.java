@@ -20,7 +20,7 @@ import com.example.dodiddone.metier.Cahier;
 import com.example.dodiddone.metier.Regle;
 import com.example.dodiddone.metier.typedValues.TypesEnum;
 
-public class CreateCahierDialogFragment extends DialogFragment {
+public class CreateCahierDialogFragment extends MyDialogFragment {
 
     @NonNull
     @Override
@@ -56,11 +56,11 @@ public class CreateCahierDialogFragment extends DialogFragment {
         cdao.insert(cahier);
         RegleDAO rdao = new RegleDAO(getContext(),cahier);
         if(hasTitle) {
-            Regle rTitle = new Regle("Title", null, TypesEnum.TITRE, cahier);
+            Regle rTitle = new Regle(getString(R.string.dialog_create_cahier_title_default_name), null, TypesEnum.TITRE, cahier);
             rdao.insert(rTitle);
         }
         if(hasDesc) {
-            Regle rDesc = new Regle("Desc", null, TypesEnum.TXTLONG, cahier);
+            Regle rDesc = new Regle(getString(R.string.dialog_create_cahier_desc_default_name), null, TypesEnum.TXTLONG, cahier);
             rdao.insert(rDesc);
         }
         cdao.close();

@@ -4,6 +4,7 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.cardview.widget.CardView;
 
 import android.content.Context;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
@@ -26,6 +27,7 @@ public class CahierActivity extends AppCompatActivity {
 
     public static final String CAHIER_ID = "com.example.dodiddone.activities.CahierActivity.CAHIER_ID";
 
+    private long cahierId;
     private Cahier cahier;
     private LinkedList<Page> pages;
 
@@ -36,31 +38,29 @@ public class CahierActivity extends AppCompatActivity {
         setContentView(R.layout.cahier_activity);
 
         Intent intent = getIntent();
-        long cid = intent.getLongExtra(CAHIER_ID, -1);
+        cahierId = intent.getLongExtra(CAHIER_ID, -1);
 
-        Log.i("IntendID", "page id = "+cid);
-
-        fetchData(cid);
-
-        ((TextView)findViewById(R.id.section_page_title)).setText(this.cahier.getNom());
-
-        displayPages();
-
-
-
+        Log.i("IntendID", "page id = "+cahierId);
     }
 
+    @Override
+    protected void onResume() {
+        super.onResume();
+        reload();
+    }
 
-    private void fetchData(long cid) {
-        Context appCtxt = getApplicationContext();
-        this.cahier =  EntitiesManager.getCompleteCahier(appCtxt, cid);
+    public void reload() {
+        this.cahier =  EntitiesManager.getCompleteCahier(this, cahierId);
         this.pages = this.cahier.getPages();
+        ((TextView)findViewById(R.id.section_page_title)).setText(this.cahier.getNom());
+        displayPages();
     }
 
 
     private void displayPages() {
 
         LinearLayout container = (LinearLayout) findViewById(R.id.pageact_pages_container);
+        container.removeAllViews();
 
         ArrayList<View> cards = new ArrayList<>();
 
@@ -84,6 +84,12 @@ public class CahierActivity extends AppCompatActivity {
         Log.println(Log.INFO,"touch", "touch");
 
         AddPageDialogFragment dialog = new AddPageDialogFragment(this.cahier);
+        dialog.setOnDismissListener(new DialogInterface.OnDismissListener() {
+            @Override
+            public void onDismiss(DialogInterface dialog) {
+                reload();
+            }
+        });
         dialog.show(this.getSupportFragmentManager(),"AddPage");
     }
 

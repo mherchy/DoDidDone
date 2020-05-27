@@ -4,6 +4,7 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.cardview.widget.CardView;
 
 import android.content.Context;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
@@ -34,14 +35,18 @@ public class CahiersActivity extends AppCompatActivity {
     }
 
 
-    protected void displayCahiers() {
-        Context appCtxt = getApplicationContext();
-        CahierDAO cdao = new CahierDAO(appCtxt);
+    public void reload() {
+        CahierDAO cdao = new CahierDAO(this);
         cdao.open();
         this.cahiers =  cdao.selectAll();
         cdao.close();
+    }
+
+    public void displayCahiers() {
+        reload();
 
         LinearLayout container = (LinearLayout) findViewById(R.id.cahieract_caihiers_container);
+        container.removeAllViews();
 
         ArrayList<View> cards = new ArrayList<>();
 
@@ -52,6 +57,7 @@ public class CahiersActivity extends AppCompatActivity {
             container.addView(v);
         }
     }
+
 
     protected View getVueFromCahier(Cahier c) {
         Context appCtxt = getApplicationContext();
@@ -81,8 +87,14 @@ public class CahiersActivity extends AppCompatActivity {
     public void onClickCreateCahier(View btn) {
         Log.println(Log.INFO,"touch", "touch");
 
-        CreateCahierDialogFragment dialog = new CreateCahierDialogFragment();
-        dialog.show(this.getSupportFragmentManager(),"CreateCahier");
+        CreateCahierDialogFragment dialogf = new CreateCahierDialogFragment();
+        dialogf.setOnDismissListener(new DialogInterface.OnDismissListener() {
+            @Override
+            public void onDismiss(DialogInterface dialog) {
+                reload();
+            }
+        });
+        dialogf.show(this.getSupportFragmentManager(),"CreateCahier");
     }
 
 }
