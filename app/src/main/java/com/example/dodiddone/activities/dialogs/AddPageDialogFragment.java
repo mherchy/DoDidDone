@@ -9,6 +9,7 @@ import android.view.View;
 import android.widget.CheckBox;
 import android.widget.EditText;
 import android.widget.LinearLayout;
+import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AlertDialog;
@@ -70,6 +71,9 @@ public class AddPageDialogFragment extends MyDialogFragment {
                     page.addLigne(ligne);
                 }
                 EntitiesManager.insertNewPage(getContext(), cahier, page);
+
+                Toast toast = Toast.makeText(getContext(), R.string.dialog_create_page_confirm_msg, Toast.LENGTH_LONG);
+                toast.show();
             }
         });
 

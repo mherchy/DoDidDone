@@ -80,7 +80,7 @@ public class CahiersActivity extends AppCompatActivity {
                 dialog.setOnDismissListener(new DialogInterface.OnDismissListener() {
                     @Override
                     public void onDismiss(DialogInterface dialog) {
-
+                        //reload();
                     }
                 });
                 dialog.show(getSupportFragmentManager(),"AddPage");

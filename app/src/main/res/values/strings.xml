@@ -47,6 +47,7 @@
     <string name="dialog_create_cahier_desc_default_name">Description</string>
 
     <string name="dialog_create_page_title">Nouvelle page</string>
+    <string name="dialog_create_page_confirm_msg">Une nouvelle page a été ajouté</string>
 
 
     <string name="dialog_create_regle_title">Nouvelle Règle</string>
