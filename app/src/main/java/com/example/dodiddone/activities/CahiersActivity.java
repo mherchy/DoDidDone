@@ -11,11 +11,16 @@ import android.util.Log;
 import android.view.View;
 import android.widget.LinearLayout;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.example.dodiddone.R;
+import com.example.dodiddone.activities.dialogs.AddPageDialogFragment;
 import com.example.dodiddone.activities.dialogs.CreateCahierDialogFragment;
 import com.example.dodiddone.db.CahierDAO;
+import com.example.dodiddone.db.EntitiesManager;
 import com.example.dodiddone.metier.Cahier;
+import com.example.dodiddone.vues.CahierCardView;
+import com.google.android.material.snackbar.Snackbar;
 
 import java.util.ArrayList;
 import java.util.Iterator;
@@ -29,21 +34,16 @@ public class CahiersActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
-
-        displayCahiers();
-
+        reload();
     }
 
 
     public void reload() {
-        CahierDAO cdao = new CahierDAO(this);
-        cdao.open();
-        this.cahiers =  cdao.selectAll();
-        cdao.close();
+        this.cahiers = EntitiesManager.getCompleteCahiers(this);
+        displayCahiers();
     }
 
     public void displayCahiers() {
-        reload();
 
         LinearLayout container = (LinearLayout) findViewById(R.id.cahieract_caihiers_container);
         container.removeAllViews();
@@ -53,22 +53,15 @@ public class CahiersActivity extends AppCompatActivity {
         Iterator<Cahier> ic = this.cahiers.iterator();
         while (ic.hasNext()) {
             Cahier c = ic.next();
-            View v = this.getVueFromCahier(c);
+            CahierCardView v = this.getVueFromCahier(c);
             container.addView(v);
         }
     }
 
 
-    protected View getVueFromCahier(Cahier c) {
-        Context appCtxt = getApplicationContext();
-        CardView card = new CardView(appCtxt);
-        card.setUseCompatPadding(true);
-        card.setTag(c);
+    protected CahierCardView getVueFromCahier(final Cahier cahier) {
 
-        // Filling Card with components
-        TextView title = new TextView(appCtxt);
-        title.setText(c.getNom());
-        card.addView(title);
+        CahierCardView card = new CahierCardView(this, cahier);
 
         card.setOnClickListener(new CardView.OnClickListener() {
             @Override
@@ -77,6 +70,20 @@ public class CahiersActivity extends AppCompatActivity {
                 Intent intent = new Intent(getApplicationContext(), CahierActivity.class);
                 intent.putExtra(CahierActivity.CAHIER_ID, cahier.getId());
                 startActivity(intent);
+            }
+        });
+
+        card.setOnClickSideBtn(new CardView.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                AddPageDialogFragment dialog = new AddPageDialogFragment(cahier);
+                dialog.setOnDismissListener(new DialogInterface.OnDismissListener() {
+                    @Override
+                    public void onDismiss(DialogInterface dialog) {
+
+                    }
+                });
+                dialog.show(getSupportFragmentManager(),"AddPage");
             }
         });
 

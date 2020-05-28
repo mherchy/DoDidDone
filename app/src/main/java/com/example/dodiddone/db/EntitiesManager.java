@@ -7,10 +7,25 @@ import com.example.dodiddone.metier.Ligne;
 import com.example.dodiddone.metier.Page;
 import com.example.dodiddone.metier.Regle;
 
+import java.util.HashSet;
 import java.util.LinkedList;
 import java.util.Set;
+import java.util.TreeSet;
 
 public class EntitiesManager {
+
+    public static Set<Cahier> getCompleteCahiers(Context appCtxt) {
+        CahierDAO cdao = new CahierDAO(appCtxt);
+        cdao.open();
+        Set<Cahier> cahiersVides = cdao.selectAll();
+        cdao.close();
+
+        HashSet<Cahier> cahiers = new HashSet<>();
+        for(Cahier c : cahiersVides) {
+            cahiers.add(getCompleteCahier(appCtxt, c.getId()));
+        }
+        return cahiers;
+    }
 
     public static Cahier getCompleteCahier(Context appCtxt, long cid) {
         CahierDAO cdao = new CahierDAO(appCtxt);

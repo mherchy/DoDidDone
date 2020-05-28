@@ -23,6 +23,10 @@ public class PageCardView extends CardView {
 
     public void setPage(Page page) {
         this.page = page;
+        build();
+    }
+
+    private void build() {
         this.setTag(page);
 
         LinearLayout lignesContainer = new LinearLayout(this.getContext());
