@@ -15,6 +15,7 @@
 
     <string name="cancel">Annuler</string>
     <string name="create">Créer</string>
+    <string name="confirm">Confirmer</string>
     <string name="config">Configuration</string>
 
     <string name="bool_true">Oui</string>
@@ -53,6 +54,11 @@
     <string name="dialog_create_regle_title">Nouvelle Règle</string>
     <string name="dialog_create_regle_name_input_hint">Nom</string>
     <string name="dialog_create_regle_unit_input_hint">Unité (Optionnel)</string>
+
+    <string name="dialog_manage_regle_calculs_title">Statistiques à afficher</string>
+    <string name="dialog_manage_regle_calculs_no_choices">
+        Il n\'y a pas de statistiques disponibles pour ce type de donnée
+    </string>
 
 
 </resources>

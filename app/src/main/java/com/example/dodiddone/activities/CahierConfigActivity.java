@@ -12,6 +12,7 @@ import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import com.example.dodiddone.R;
+import com.example.dodiddone.activities.dialogs.AddCalculDialogFragment;
 import com.example.dodiddone.activities.dialogs.AddRegleDialogFragment;
 import com.example.dodiddone.db.EntitiesManager;
 import com.example.dodiddone.metier.Cahier;
@@ -49,14 +50,14 @@ public class CahierConfigActivity extends AppCompatActivity {
     public void onAddRegle(View btn) {
         Log.println(Log.INFO,"touch", "touch");
 
-        AddRegleDialogFragment dialog = new AddRegleDialogFragment(this.cahier);
-        dialog.setOnDismissListener(new DialogInterface.OnDismissListener() {
+        AddRegleDialogFragment dialogFragment = new AddRegleDialogFragment(this.cahier);
+        dialogFragment.setOnDismissListener(new DialogInterface.OnDismissListener() {
             @Override
             public void onDismiss(DialogInterface dialog) {
                 reload();
             }
         });
-        dialog.show(this.getSupportFragmentManager(),"AddRegle");
+        dialogFragment.show(this.getSupportFragmentManager(),"AddRegle");
     }
 
     private void displayRegisteredRegles() {
@@ -77,7 +78,7 @@ public class CahierConfigActivity extends AppCompatActivity {
         }
     }
 
-    private View getRegleView(Regle regle) {
+    private View getRegleView(final Regle regle) {
         CardView card = new CardView(this);
         card.setUseCompatPadding(true);
         card.setTag(regle);
@@ -86,6 +87,19 @@ public class CahierConfigActivity extends AppCompatActivity {
         TextView title = new TextView(this);
         title.setText(getString(R.string.section_cahier_regle_name, regle.getNom(), regle.getType().getNom()));
 
+        card.setOnClickListener(new CardView.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                AddCalculDialogFragment dialogFragment = new AddCalculDialogFragment(regle);
+                dialogFragment.setOnDismissListener(new DialogInterface.OnDismissListener() {
+                    @Override
+                    public void onDismiss(DialogInterface dialog) {
+                        reload();
+                    }
+                });
+                dialogFragment.show(getSupportFragmentManager(), "AddCalcul");
+            }
+        });
 
         card.addView(title);
 

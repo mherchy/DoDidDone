@@ -5,6 +5,8 @@ import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteDatabase.*;
 import android.database.sqlite.SQLiteOpenHelper;
 
+import com.example.dodiddone.metier.typedValues.calcul.Calcul;
+
 public class DatabaseHandler extends SQLiteOpenHelper {
 
     public DatabaseHandler(Context context, String name, CursorFactory factory, int version) {
@@ -28,6 +30,7 @@ public class DatabaseHandler extends SQLiteOpenHelper {
 
     private void resetDb(SQLiteDatabase db) {
         //Drop
+        db.execSQL(CalculDAO.TABLE_DROP);
         db.execSQL(LigneDAO.TABLE_DROP);
         db.execSQL(PageDAO.TABLE_DROP);
         db.execSQL(RegleDAO.TABLE_DROP);
@@ -37,5 +40,6 @@ public class DatabaseHandler extends SQLiteOpenHelper {
         db.execSQL(RegleDAO.TABLE_CREATE);
         db.execSQL(PageDAO.TABLE_CREATE);
         db.execSQL(LigneDAO.TABLE_CREATE);
+        db.execSQL(CalculDAO.TABLE_CREATE);
     }
 }

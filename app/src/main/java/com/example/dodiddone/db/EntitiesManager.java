@@ -6,6 +6,7 @@ import com.example.dodiddone.metier.Cahier;
 import com.example.dodiddone.metier.Ligne;
 import com.example.dodiddone.metier.Page;
 import com.example.dodiddone.metier.Regle;
+import com.example.dodiddone.metier.typedValues.calcul.Calcul;
 
 import java.util.HashSet;
 import java.util.LinkedList;
@@ -39,6 +40,11 @@ public class EntitiesManager {
         Set<Regle> regles = rdao.selectCahierRegles();
         cahier.addRegle(regles);
 
+        for (Regle r : regles) {
+            CalculDAO cldao = new CalculDAO(appCtxt,r);
+            r.addCalcul(cldao.selectRegleCalculs());
+        }
+
         // Pages
         PageDAO pdao = new PageDAO(appCtxt, cahier);
         LinkedList<Page> pages = pdao.selectCahierPages();
@@ -69,6 +75,11 @@ public class EntitiesManager {
         RegleDAO rdao = new RegleDAO(appCtxt, cahier);
         Set<Regle> regles = rdao.selectCahierRegles();
         cahier.addRegle(regles);
+
+        for (Regle r : regles) {
+            CalculDAO cldao = new CalculDAO(appCtxt,r);
+            r.addCalcul(cldao.selectRegleCalculs());
+        }
 
         cdao.close();
 

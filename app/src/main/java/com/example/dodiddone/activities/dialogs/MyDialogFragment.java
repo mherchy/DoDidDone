@@ -4,7 +4,7 @@ import android.content.DialogInterface;
 
 import androidx.fragment.app.DialogFragment;
 
-public class MyDialogFragment extends DialogFragment {
+public abstract class MyDialogFragment extends DialogFragment {
 
     protected DialogInterface.OnDismissListener onDismissListener;
 
