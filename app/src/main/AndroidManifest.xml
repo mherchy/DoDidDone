@@ -9,7 +9,22 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-        <activity android:name=".activities.CahierConfigActivity"></activity>
+
+        <service
+            android:name=".services.AuthenticatorService"
+            android:enabled="true"
+            android:exported="true">
+            <intent-filter>
+                <action android:name="android.accounts.AccountAuthenticator" />
+            </intent-filter>
+
+            <meta-data
+                android:name="android.accounts.AccountAuthenticator"
+                android:resource="@xml/authenticator" /> <!-- We haven't defined this -->
+        </service>
+
+        <activity android:name=".activities.AccountsActivity" />
+        <activity android:name=".activities.CahierConfigActivity" />
         <activity android:name=".activities.CahierActivity" />
         <activity android:name=".activities.CahiersActivity">
             <intent-filter>

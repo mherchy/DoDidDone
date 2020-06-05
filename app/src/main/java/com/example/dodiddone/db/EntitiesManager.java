@@ -17,7 +17,9 @@ import java.util.TreeSet;
 public class EntitiesManager {
 
     public static Set<Cahier> getCompleteCahiers(Context appCtxt) {
-        CahierDAO cdao = new CahierDAO(appCtxt, UserServices.getId());
+        UserServices us = new UserServices(appCtxt);
+
+        CahierDAO cdao = new CahierDAO(appCtxt, us.getUserAccount().name);
         cdao.open();
         Set<Cahier> cahiersVides = cdao.selectAll();
         cdao.close();
@@ -30,7 +32,9 @@ public class EntitiesManager {
     }
 
     public static Cahier getCompleteCahier(Context appCtxt, long cid) {
-        CahierDAO cdao = new CahierDAO(appCtxt, UserServices.getId());
+        UserServices us = new UserServices(appCtxt);
+
+        CahierDAO cdao = new CahierDAO(appCtxt, us.getUserAccount().name);
         cdao.open();
 
         // Base entity
@@ -66,7 +70,9 @@ public class EntitiesManager {
 
 
     public static Cahier getNoPageCahier(Context appCtxt, long cid) {
-        CahierDAO cdao = new CahierDAO(appCtxt, UserServices.getId());
+        UserServices us = new UserServices(appCtxt);
+
+        CahierDAO cdao = new CahierDAO(appCtxt, us.getUserAccount().name);
         cdao.open();
 
         // Base entity

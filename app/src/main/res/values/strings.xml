@@ -13,6 +13,12 @@
     <string name="regle">Regle</string>
     <string name="regles">Regles</string>
 
+
+    <string name="mail">Mail</string>
+    <string name="pwd">Mot de passe</string>
+    <string name="connect">Connexion</string>
+
+
     <string name="cancel">Annuler</string>
     <string name="create">Créer</string>
     <string name="confirm">Confirmer</string>

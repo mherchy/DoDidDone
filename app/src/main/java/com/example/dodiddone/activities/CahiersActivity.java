@@ -3,6 +3,8 @@ package com.example.dodiddone.activities;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.cardview.widget.CardView;
 
+import android.accounts.Account;
+import android.accounts.AccountManager;
 import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
@@ -16,11 +18,10 @@ import android.widget.Toast;
 import com.example.dodiddone.R;
 import com.example.dodiddone.activities.dialogs.AddPageDialogFragment;
 import com.example.dodiddone.activities.dialogs.CreateCahierDialogFragment;
-import com.example.dodiddone.db.CahierDAO;
 import com.example.dodiddone.db.EntitiesManager;
 import com.example.dodiddone.metier.Cahier;
+import com.example.dodiddone.services.UserServices;
 import com.example.dodiddone.vues.CahierCardView;
-import com.google.android.material.snackbar.Snackbar;
 
 import java.util.ArrayList;
 import java.util.Iterator;
@@ -39,6 +40,10 @@ public class CahiersActivity extends AppCompatActivity {
     @Override
     protected void onResume() {
         super.onResume();
+        UserServices us = new UserServices(this);
+        if(!us.isUserConnected()) {
+            startActivity(new Intent(this, AccountsActivity.class));
+        }
         reload();
     }
 

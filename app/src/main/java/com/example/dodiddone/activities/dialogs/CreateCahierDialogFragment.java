@@ -51,9 +51,10 @@ public class CreateCahierDialogFragment extends MyDialogFragment {
     }
 
     private void createCahier(String name, boolean hasTitle, boolean hasDesc) {
-        Cahier cahier = new Cahier(name);
+        UserServices us = new UserServices(getContext());
 
-        CahierDAO cdao = new CahierDAO(getContext(), UserServices.getId());
+        Cahier cahier = new Cahier(name);
+        CahierDAO cdao = new CahierDAO(getContext(),us.getUserAccount().name);
         cdao.open();
         cdao.insert(cahier);
         RegleDAO rdao = new RegleDAO(getContext(),cahier);
