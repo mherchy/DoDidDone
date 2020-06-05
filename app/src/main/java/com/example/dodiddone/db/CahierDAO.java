@@ -14,17 +14,22 @@ public class CahierDAO extends AbstractDAO {
     public static final String TABLE_NAME = "cahier";
     public static final String COL_ID = "id";
     public static final String COL_NOM = "nom";
+    public static final String COL_FK_USER = "fk_user";
 
     public static final String TABLE_CREATE =
             "CREATE TABLE " + TABLE_NAME + " (" +
                     COL_ID + " INTEGER PRIMARY KEY AUTOINCREMENT, " +
-                    COL_NOM + " TEXT" +
+                    COL_NOM + " TEXT, " +
+                    COL_FK_USER + " INTEGER " +
             "); ";
     public static final String TABLE_DROP = "DROP TABLE IF EXISTS " + TABLE_NAME + "; ";
 
+    private long idUser;
 
-    public CahierDAO(Context pContext) {
+
+    public CahierDAO(Context pContext, long idUser) {
         super(pContext, TABLE_NAME);
+        this.idUser = idUser;
     }
 
     /**
@@ -34,6 +39,7 @@ public class CahierDAO extends AbstractDAO {
     public boolean insert(Cahier e) {
         ContentValues row = new ContentValues();
         row.put(COL_NOM, e.getNom());
+        row.put(COL_FK_USER, idUser);
         long id = this.insert(row);
         if(id != -1) {
             e.setId(id);
@@ -47,6 +53,7 @@ public class CahierDAO extends AbstractDAO {
     public boolean update(Cahier e) {
         ContentValues row = new ContentValues();
         row.put(COL_NOM, e.getNom());
+        row.put(COL_FK_USER, idUser);
         return this.update(e.getId(), row) > 0;
     }
 
@@ -69,7 +76,7 @@ public class CahierDAO extends AbstractDAO {
      */
     public Set<Cahier> selectAll() {
         Set<Cahier> list = new HashSet<>();
-        Cursor cursor = super.selectAllRows();
+        Cursor cursor = mDb.rawQuery("SELECT * FROM " + TABLE_NAME + " WHERE " + COL_FK_USER + " = ?", new String[] {""+idUser});
         while(cursor.moveToNext()) {
             Cahier c = new Cahier(cursor.getLong(0), cursor.getString(1));
             list.add(c);

@@ -19,6 +19,7 @@ import com.example.dodiddone.db.RegleDAO;
 import com.example.dodiddone.metier.Cahier;
 import com.example.dodiddone.metier.Regle;
 import com.example.dodiddone.metier.typedValues.TypesEnum;
+import com.example.dodiddone.services.UserServices;
 
 public class CreateCahierDialogFragment extends MyDialogFragment {
 
@@ -51,7 +52,8 @@ public class CreateCahierDialogFragment extends MyDialogFragment {
 
     private void createCahier(String name, boolean hasTitle, boolean hasDesc) {
         Cahier cahier = new Cahier(name);
-        CahierDAO cdao = new CahierDAO(getContext());
+
+        CahierDAO cdao = new CahierDAO(getContext(), UserServices.getId());
         cdao.open();
         cdao.insert(cahier);
         RegleDAO rdao = new RegleDAO(getContext(),cahier);

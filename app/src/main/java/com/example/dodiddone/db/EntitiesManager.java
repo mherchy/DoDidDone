@@ -7,6 +7,7 @@ import com.example.dodiddone.metier.Ligne;
 import com.example.dodiddone.metier.Page;
 import com.example.dodiddone.metier.Regle;
 import com.example.dodiddone.metier.typedValues.calcul.Calcul;
+import com.example.dodiddone.services.UserServices;
 
 import java.util.HashSet;
 import java.util.LinkedList;
@@ -16,7 +17,7 @@ import java.util.TreeSet;
 public class EntitiesManager {
 
     public static Set<Cahier> getCompleteCahiers(Context appCtxt) {
-        CahierDAO cdao = new CahierDAO(appCtxt);
+        CahierDAO cdao = new CahierDAO(appCtxt, UserServices.getId());
         cdao.open();
         Set<Cahier> cahiersVides = cdao.selectAll();
         cdao.close();
@@ -29,7 +30,7 @@ public class EntitiesManager {
     }
 
     public static Cahier getCompleteCahier(Context appCtxt, long cid) {
-        CahierDAO cdao = new CahierDAO(appCtxt);
+        CahierDAO cdao = new CahierDAO(appCtxt, UserServices.getId());
         cdao.open();
 
         // Base entity
@@ -65,7 +66,7 @@ public class EntitiesManager {
 
 
     public static Cahier getNoPageCahier(Context appCtxt, long cid) {
-        CahierDAO cdao = new CahierDAO(appCtxt);
+        CahierDAO cdao = new CahierDAO(appCtxt, UserServices.getId());
         cdao.open();
 
         // Base entity
