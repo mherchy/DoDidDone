@@ -43,6 +43,14 @@
                 android:onClick="onConfigClick"
                 android:text="@string/config" />
 
+            <LinearLayout
+                android:id="@+id/pageact_calculs_container"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_weight="20"
+                android:gravity="end"
+                android:orientation="vertical"></LinearLayout>
+
         </LinearLayout>
 
         <ScrollView

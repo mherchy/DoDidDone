@@ -11,6 +11,8 @@ import androidx.cardview.widget.CardView;
 
 import com.example.dodiddone.R;
 import com.example.dodiddone.metier.Cahier;
+import com.example.dodiddone.metier.Regle;
+import com.example.dodiddone.metier.typedValues.calcul.Calcul;
 
 import java.util.zip.Inflater;
 
@@ -48,6 +50,17 @@ public class CahierCardView extends CardView {
         TextView title = new TextView(getContext());
         title.setText(cahier.getNom());
         itemContainer.addView(title);
+
+        for(Regle regle : cahier.getRegles().values()) {
+            for(Calcul calcul : regle.getCalculs().values()) {
+                TextView calcultxt = new TextView(getContext());
+                String content = calcul.getDesc();
+                content = content.concat(" : ").concat(calcul.compute(cahier,regle));
+                calcultxt.setText(content);
+                itemContainer.addView(calcultxt);
+            }
+        }
+
 
         this.addView(cardLayout);
     }

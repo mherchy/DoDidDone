@@ -17,6 +17,8 @@ import com.example.dodiddone.activities.dialogs.AddPageDialogFragment;
 import com.example.dodiddone.db.EntitiesManager;
 import com.example.dodiddone.metier.Cahier;
 import com.example.dodiddone.metier.Page;
+import com.example.dodiddone.metier.Regle;
+import com.example.dodiddone.metier.typedValues.calcul.Calcul;
 import com.example.dodiddone.vues.PageCardView;
 
 import java.util.ArrayList;
@@ -53,7 +55,24 @@ public class CahierActivity extends AppCompatActivity {
         this.cahier =  EntitiesManager.getCompleteCahier(this, cahierId);
         this.pages = this.cahier.getPages();
         ((TextView)findViewById(R.id.section_page_title)).setText(this.cahier.getNom());
+        displayCalculs();
         displayPages();
+    }
+
+    private void displayCalculs() {
+
+        LinearLayout container = (LinearLayout) findViewById(R.id.pageact_calculs_container);
+        container.removeAllViews();
+
+        for(Regle regle : cahier.getRegles().values()) {
+            for(Calcul calcul : regle.getCalculs().values()) {
+                TextView calcultxt = new TextView(this);
+                String content = calcul.getDesc();
+                content = content.concat(" : ").concat(calcul.compute(cahier,regle));
+                calcultxt.setText(content);
+                container.addView(calcultxt);
+            }
+        }
     }
 
 
@@ -62,11 +81,7 @@ public class CahierActivity extends AppCompatActivity {
         LinearLayout container = (LinearLayout) findViewById(R.id.pageact_pages_container);
         container.removeAllViews();
 
-        ArrayList<View> cards = new ArrayList<>();
-
-        Iterator<Page> ip = this.pages.iterator();
-        while (ip.hasNext()) {
-            Page p = ip.next();
+        for (Page p : this.pages) {
             View v = this.getVueFromPage(p);
             container.addView(v);
         }

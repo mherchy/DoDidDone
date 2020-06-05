@@ -72,4 +72,7 @@ public class Regle extends Entity {
     public boolean hasCalcul(Calcul calcul) {
         return this.calculs.containsKey(calcul.getName());
     }
+    public HashMap<String, Calcul> getCalculs() {
+        return calculs;
+    }
 }

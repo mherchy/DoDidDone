@@ -45,6 +45,7 @@ public class CalculDAO extends AbstractDAO {
     public boolean insert(Calcul calcul) {
         ContentValues row = new ContentValues();
         row.put(COL_NOM, calcul.getName());
+        row.put(COL_FK_REGLE, pRegle.getId());
         long id = this.insert(row);
         return id != -1;
     }

@@ -1,5 +1,7 @@
 package com.example.dodiddone.metier;
 
+import com.example.dodiddone.metier.typedValues.TypesEnum;
+
 import java.io.Serializable;
 import java.util.Collection;
 import java.util.HashMap;
@@ -59,6 +61,16 @@ public class Cahier extends Entity implements Serializable {
         for (Regle regle : itr) {
             this.addRegle(regle);
         }
+    }
+
+    public HashSet<Ligne> getLignes(Regle regle) {
+        HashSet<Ligne> lignes = new HashSet<>();
+        for(Page page : this.getPages()) {
+            if(page.getLignes().containsKey(regle)) {
+                lignes.add(page.getLignes().get(regle));
+            }
+        }
+        return lignes;
     }
 
 
