@@ -5,10 +5,18 @@ import androidx.appcompat.app.AppCompatActivity;
 import android.accounts.Account;
 import android.accounts.AccountManager;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
 import android.widget.EditText;
 
+import com.android.volley.Request;
+import com.android.volley.Response;
+import com.android.volley.VolleyError;
+import com.android.volley.toolbox.JsonObjectRequest;
 import com.example.dodiddone.R;
+import com.example.dodiddone.services.RequestManager;
+
+import org.json.JSONObject;
 
 public class AccountsActivity extends AppCompatActivity {
 
@@ -32,6 +40,35 @@ public class AccountsActivity extends AppCompatActivity {
         am.addAccountExplicitly(account, password, null);
         am.setAuthToken(account, "full_access", authToken);
 
+        request(email, password);
+
         finish();
+    }
+
+    private void request(String email, String password) {
+        String url = "http://10.0.2.2:8008/login";
+
+        JsonObjectRequest jsonObjectRequest = new JsonObjectRequest(
+                Request.Method.GET,
+                url,
+                null,
+                new Response.Listener<JSONObject>() {
+                    @Override
+                    public void onResponse(JSONObject response) {
+                        Log.i("Login request", response.toString());
+                    }
+                },
+                new Response.ErrorListener() {
+
+                    @Override
+                    public void onErrorResponse(VolleyError error) {
+                        // TODO: Handle error
+
+                    }
+                });
+
+        // Access the RequestQueue through your singleton class.
+        RequestManager.getInstance(this).addToRequestQueue(jsonObjectRequest);
+
     }
 }
