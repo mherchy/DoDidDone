@@ -44,7 +44,9 @@ public class CahiersActivity extends AppCompatActivity {
         if(!us.isUserConnected()) {
             startActivity(new Intent(this, AccountsActivity.class));
         }
-        reload();
+        else {
+            reload();
+        }
     }
 
     public void reload() {
@@ -59,12 +61,18 @@ public class CahiersActivity extends AppCompatActivity {
 
         ArrayList<View> cards = new ArrayList<>();
 
-        Iterator<Cahier> ic = this.cahiers.iterator();
-        while (ic.hasNext()) {
-            Cahier c = ic.next();
-            CahierCardView v = this.getVueFromCahier(c);
-            container.addView(v);
+        if(this.cahiers.size() == 0) {
+            TextView msg = new TextView(this);
+            msg.setText(R.string.section_cahier_no_cahier_msg);
+            container.addView(msg);
         }
+        else {
+            for (Cahier c : this.cahiers) {
+                CahierCardView v = this.getVueFromCahier(c);
+                container.addView(v);
+            }
+        }
+
     }
 
 

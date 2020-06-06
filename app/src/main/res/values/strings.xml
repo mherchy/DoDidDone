@@ -32,6 +32,7 @@
 
     <string name="section_cahier_name">Mes Cahiers</string>
     <string name="section_cahier_add_btn">Créer</string>
+    <string name="section_cahier_no_cahier_msg">Vous n\'avez pas encore créé de cahier</string>
 
 
     <string name="section_pages_name">Pages</string>
