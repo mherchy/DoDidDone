@@ -5,6 +5,7 @@ import android.content.Context;
 import android.database.Cursor;
 
 import com.example.dodiddone.metier.Cahier;
+import com.example.dodiddone.services.AppStateSync;
 
 import java.util.HashSet;
 import java.util.Set;
@@ -43,6 +44,7 @@ public class CahierDAO extends AbstractDAO {
         long id = this.insert(row);
         if(id != -1) {
             e.setId(id);
+            AppStateSync.syncCahier(e);
             return true;
         }
         return false;

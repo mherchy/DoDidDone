@@ -9,7 +9,7 @@ import java.util.HashSet;
 import java.util.Iterator;
 import java.util.LinkedList;
 
-public class Cahier extends Entity implements Serializable {
+public class Cahier extends Entity {
 
     protected String nom;
     protected LinkedList<Page> pages;

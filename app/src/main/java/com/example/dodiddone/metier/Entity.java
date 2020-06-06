@@ -1,6 +1,8 @@
 package com.example.dodiddone.metier;
 
-public abstract class Entity {
+import java.io.Serializable;
+
+public abstract class Entity implements Serializable {
 
     protected long id = -1;
 

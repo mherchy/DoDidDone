@@ -6,13 +6,11 @@ import com.example.dodiddone.metier.Cahier;
 import com.example.dodiddone.metier.Ligne;
 import com.example.dodiddone.metier.Page;
 import com.example.dodiddone.metier.Regle;
-import com.example.dodiddone.metier.typedValues.calcul.Calcul;
 import com.example.dodiddone.services.UserServices;
 
 import java.util.HashSet;
 import java.util.LinkedList;
 import java.util.Set;
-import java.util.TreeSet;
 
 public class EntitiesManager {
 

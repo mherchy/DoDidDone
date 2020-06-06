@@ -6,6 +6,7 @@ import android.database.Cursor;
 
 import com.example.dodiddone.metier.Cahier;
 import com.example.dodiddone.metier.Regle;
+import com.example.dodiddone.services.AppStateSync;
 
 import java.util.HashSet;
 import java.util.Set;
@@ -50,6 +51,7 @@ public class RegleDAO extends AbstractDAO {
         long id = this.insert(row);
         if(id != -1) {
             e.setId(id);
+            AppStateSync.syncCahier(pCahier);
             return true;
         }
         return false;

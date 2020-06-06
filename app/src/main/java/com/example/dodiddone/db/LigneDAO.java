@@ -7,6 +7,7 @@ import android.database.Cursor;
 import com.example.dodiddone.metier.Ligne;
 import com.example.dodiddone.metier.Page;
 import com.example.dodiddone.metier.Regle;
+import com.example.dodiddone.services.AppStateSync;
 
 import java.util.HashSet;
 import java.util.Set;
@@ -57,6 +58,7 @@ public class LigneDAO extends AbstractDAO {
         long id = this.insert(row);
         if(id != -1) {
             e.setId(id);
+            AppStateSync.syncCahier(pPage.getCahier());
             return true;
         }
         return false;

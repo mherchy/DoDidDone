@@ -7,6 +7,7 @@ import android.database.Cursor;
 import com.example.dodiddone.metier.Regle;
 import com.example.dodiddone.metier.typedValues.calcul.Calcul;
 import com.example.dodiddone.metier.typedValues.calcul.Calculs;
+import com.example.dodiddone.services.AppStateSync;
 
 import java.util.ArrayList;
 import java.util.HashSet;
@@ -47,7 +48,11 @@ public class CalculDAO extends AbstractDAO {
         row.put(COL_NOM, calcul.getName());
         row.put(COL_FK_REGLE, pRegle.getId());
         long id = this.insert(row);
-        return id != -1;
+        if(id != -1) {
+            AppStateSync.syncCahier(pRegle.getCahier());
+            return true;
+        }
+        return false;
     }
 
     /**

@@ -6,6 +6,7 @@ import android.database.Cursor;
 
 import com.example.dodiddone.metier.Cahier;
 import com.example.dodiddone.metier.Page;
+import com.example.dodiddone.services.AppStateSync;
 
 import java.util.HashSet;
 import java.util.LinkedList;
@@ -45,6 +46,7 @@ public class PageDAO extends AbstractDAO {
         long id = this.insert(row);
         if(id != -1) {
             e.setId(id);
+            AppStateSync.syncCahier(pCahier);
             return true;
         }
         return false;
