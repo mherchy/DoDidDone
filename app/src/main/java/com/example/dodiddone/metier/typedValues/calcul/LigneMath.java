@@ -27,7 +27,7 @@ public class LigneMath {
         if(lignes.size() == 0) {
             return BigDecimal.ZERO;
         }
-        return sum(lignes).divide(new BigDecimal(lignes.size()));
+        return sum(lignes).divide(new BigDecimal(lignes.size()),1, RoundingMode.HALF_EVEN);
     }
 
     public static BigDecimal variance(Set<Ligne> lignes) {
@@ -43,7 +43,7 @@ public class LigneMath {
                             .pow(2)
             );
         }
-        op = op.divide(new BigDecimal(lignes.size()));
+        op = op.divide(new BigDecimal(lignes.size()),1, RoundingMode.HALF_EVEN);
         return op;
     }
 

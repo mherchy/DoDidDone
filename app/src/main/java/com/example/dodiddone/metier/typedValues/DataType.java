@@ -2,7 +2,9 @@ package com.example.dodiddone.metier.typedValues;
 
 import androidx.annotation.NonNull;
 
-public abstract class DataType<T> {
+import java.io.Serializable;
+
+public abstract class DataType<T> implements Serializable {
 
     private T value;
 
